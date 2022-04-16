@@ -1,0 +1,44 @@
+{
+  "countries": [
+    {
+      "country": "India",
+      "id": 1
+    },
+    {
+      "country": "usa",
+      "id": 5
+    },
+    {
+      "country": "srilanka",
+      "id": 6
+    },
+    {
+      "country": "nepal",
+      "id": 7
+    },
+    {
+      "country": "america",
+      "id": 8
+    }
+  ],
+  "cities": [
+    {
+      "id": 1,
+      "country": "india",
+      "city": "Bengalore",
+      "population": "19000000"
+    },
+    {
+      "id": 2,
+      "country": "srilanka",
+      "city": "colombo",
+      "population": "19000000"
+    },
+    {
+      "city": "asds",
+      "population": "12242",
+      "country": "america",
+      "id": 3
+    }
+  ]
+}
