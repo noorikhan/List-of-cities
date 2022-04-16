@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { getTodo } from "../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const Table = () => {
-  const [data, setData] = useState([]);
+  const data = useSelector((store) => store.getAllTodos.todo);
+
+  const dispatch = useDispatch();
+
   useEffect(() => {
     getData();
   }, []);
 
   const getData = () => {
-    axios.get("http://localhost:8080/cities").then((res) => setData(res.data));
+    axios
+      .get("http://localhost:8080/cities")
+      .then(({ data }) => dispatch(getTodo(data)));
   };
 
   const deleteRow = (id) => {
     axios
       .delete(`http://localhost:8080/cities/${id}`)
-      .then((res) => getData())
+      .then((res) => dispatch(getTodo(data)))
       .catch((err) => console.error(err));
   };
 
@@ -73,7 +80,9 @@ export const Table = () => {
               <td>
                 <button
                   onClick={() => {
+                    getData();
                     deleteRow(ele.id);
+                    getData();
                   }}
                 >
                   Delete

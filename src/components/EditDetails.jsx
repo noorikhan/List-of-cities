@@ -2,9 +2,14 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
+import { getOneTodo, updateTodo } from "../Redux/actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export const EditDetails = () => {
   const { id } = useParams();
+
+  const data = useSelector((store) => store.getOnetodo.todo);
+  const dispatch = useDispatch();
 
   const [country, setCountry] = useState([]);
   const [city, setCities] = useState();
@@ -25,10 +30,10 @@ export const EditDetails = () => {
   }, []);
 
   const postData = () => {
-    axios
-      .patch(`http://localhost:8080/cities/${id}`, city)
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err));
+    axios.patch(`http://localhost:8080/cities/${id}`, city).then(({ data }) => {
+      dispatch(updateTodo(data));
+      getData();
+    });
   };
 
   const getCountry = () => {
@@ -38,11 +43,11 @@ export const EditDetails = () => {
       .catch((err) => console.error(err));
   };
 
-  const [data, setData] = useState([]);
   const getData = () => {
     axios
       .get(`http://localhost:8080/cities/${id}`)
-      .then((res) => setData(res.data));
+      .then(({ data }) => dispatch(getOneTodo(data)))
+      .catch((err) => console.error(err));
   };
 
   return (

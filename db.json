@@ -25,19 +25,13 @@
     {
       "id": 1,
       "country": "india",
-      "city": "Bengalore",
+      "city": "Davanagere",
       "population": "19000000"
     },
     {
-      "id": 2,
-      "country": "srilanka",
       "city": "colombo",
-      "population": "19000000"
-    },
-    {
-      "city": "asds",
-      "population": "12242",
-      "country": "america",
+      "population": "12234343",
+      "country": "srilanka",
       "id": 3
     }
   ]
