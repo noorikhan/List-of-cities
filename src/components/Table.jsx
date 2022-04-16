@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { getTodo } from "../Redux/actions";
+import {
+  getTodo,
+  sortByCountry,
+  sortByPopulationDesc,
+  sortByPopulationAsc,
+} from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Table = () => {
@@ -26,33 +31,26 @@ export const Table = () => {
       .catch((err) => console.error(err));
   };
 
-  function FilterByCountry() {
-    const res = data.sort((a, b) => {
-      return a.country - b.country;
-    });
-    setData([...data, res]);
-  }
-
-  function SortByPopulationAsc() {
-    const res = data.sort((a, b) => {
-      return a.population - b.population;
-    });
-    setData([...data, res]);
-  }
-
-  function SortByPopulationDesc() {
-    const res = data.sort((a, b) => {
-      return b.population - a.population;
-    });
-    setData([...data, res]);
-  }
-
   return (
     <>
       <div>
-        <button onClick={FilterByCountry}>FilterByCountry</button>
-        <button onClick={SortByPopulationAsc}>SortByPopulationAsc</button>
-        <button onClick={SortByPopulationDesc}>SortByPopulationDesc</button>
+        <button onClick={() => dispatch(sortByCountry(data))}>
+          FilterByCountry
+        </button>
+        <button
+          onClick={() => {
+            dispatch(sortByPopulationAsc(data));
+          }}
+        >
+          SortByPopulationAsc
+        </button>
+        <button
+          onClick={() => {
+            dispatch(sortByPopulationDesc(data));
+          }}
+        >
+          SortByPopulationDesc
+        </button>
       </div>
       <table>
         <thead>

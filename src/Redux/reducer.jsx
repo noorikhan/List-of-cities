@@ -2,6 +2,9 @@ import {
   GET_ONE_TODO,
   GET_TODOS,
   REMOVE_ONE_TODO,
+  SORT_BY_COUNTRY,
+  SORT_BY_POPULATION_ASC,
+  SORT_BY_POPULATION_DESC,
   UPDATE_ONE_TODO,
 } from "./actions";
 
@@ -14,6 +17,27 @@ export const getTodosReducer = (store = initialTodos, { type, payload }) => {
       return { ...store, todo: payload };
     case REMOVE_ONE_TODO:
       return { ...store, todo: payload };
+    case SORT_BY_COUNTRY:
+      return {
+        ...store,
+        todo: payload.sort((a, b) => {
+          return a.country - b.country;
+        }),
+      };
+    case SORT_BY_POPULATION_ASC:
+      return {
+        ...store,
+        todo: payload.sort((a, b) => {
+          return a.population - b.population;
+        }),
+      };
+    case SORT_BY_POPULATION_DESC:
+      return {
+        ...store,
+        todo: payload.sort((a, b) => {
+          return b.population - a.population;
+        }),
+      };
     default:
       return store;
   }
