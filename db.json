@@ -1,7 +1,7 @@
 {
   "countries": [
     {
-      "country": "India",
+      "country": "india",
       "id": 1
     },
     {
@@ -23,16 +23,64 @@
   ],
   "cities": [
     {
-      "id": 1,
       "country": "india",
+      "population": "19000000",
       "city": "Davanagere",
-      "population": "19000000"
+      "id": 1
     },
     {
-      "city": "colombo",
-      "population": "12234343",
       "country": "srilanka",
+      "population": "12389",
+      "city": "xyz",
       "id": 3
+    },
+    {
+      "city": "Davanagere",
+      "population": "1246795",
+      "id": 4
+    },
+    {
+      "city": "Davanagere",
+      "population": "3467890032",
+      "id": 5
+    },
+    {
+      "country": "nepal",
+      "population": "124546865",
+      "city": "mysore",
+      "id": 6
+    },
+    {
+      "country": "India",
+      "population": "124546865",
+      "city": "mysore",
+      "id": 7
+    },
+    {
+      "country": "usa",
+      "population": "235434232",
+      "city": "Davanagere",
+      "id": 8
+    },
+    {
+      "city": "sxsxs",
+      "population": "234565453",
+      "id": 9
+    },
+    {
+      "city": "Davanagere",
+      "population": "56678",
+      "id": 10
+    },
+    {
+      "city": "Davanagere",
+      "population": "56678",
+      "id": 11
+    },
+    {
+      "city": "Davanagere",
+      "population": "56678",
+      "id": 12
     }
   ]
 }

@@ -1,16 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import {
-  getTodo,
-  sortByCountry,
-  sortByPopulationDesc,
-  sortByPopulationAsc,
-} from "../Redux/actions";
+import { getCities } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Table = () => {
-  const data = useSelector((store) => store.getAllTodos.todo);
+  const data = useSelector((store) => store.cities.city);
 
   const dispatch = useDispatch();
 
@@ -21,13 +16,13 @@ export const Table = () => {
   const getData = () => {
     axios
       .get("http://localhost:8080/cities")
-      .then(({ data }) => dispatch(getTodo(data)));
+      .then(({ data }) => dispatch(getCities(data)));
   };
 
   const deleteRow = (id) => {
     axios
       .delete(`http://localhost:8080/cities/${id}`)
-      .then((res) => dispatch(getTodo(data)))
+      .then((res) => dispatch(getCities(data)))
       .catch((err) => console.error(err));
   };
 

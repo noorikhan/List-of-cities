@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 export const AddCity = () => {
-  const [country, setCountry] = useState([]);
+  const [countries, setCountry] = useState([]);
   const [city, setCities] = useState();
 
   const handleFormdata = (e) => {
@@ -53,7 +53,7 @@ export const AddCity = () => {
           value={handleFormdata.country}
           onChange={handleFormdata}
         >
-          {country.map((ele) => (
+          {countries.map((ele) => (
             <option key={ele.id} value={ele.country}>
               {ele.country}
             </option>

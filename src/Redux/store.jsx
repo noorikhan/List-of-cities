@@ -1,10 +1,9 @@
 import { createStore, combineReducers } from "redux";
-import { getTodosReducer } from "./reducer";
-import { getOneTodoReducer } from "./reducer";
+import { getCitiesReducer, getOneCityReducer } from "./reducer";
 
 const reducer = combineReducers({
-  getAllTodos: getTodosReducer,
-  getOnetodo: getOneTodoReducer,
+  cities: getCitiesReducer,
+  city: getOneCityReducer,
 });
 
 export const store = createStore(reducer);

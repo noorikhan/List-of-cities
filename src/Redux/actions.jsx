@@ -1,42 +1,24 @@
-export const GET_TODOS = "GET_TODOS";
-export const GET_ONE_TODO = "GET_ONE_TOD";
-export const UPDATE_ONE_TODO = "PATCH_ONE_TODO";
-export const REMOVE_ONE_TODO = "REMOVE_ONE_TODO";
-export const SORT_BY_COUNTRY = "SORT_BY_COUNTRY";
-export const SORT_BY_POPULATION_ASC = "SORT_BY_POPULATION_ASC";
-export const SORT_BY_POPULATION_DESC = "SORT_BY_POPULATION_DESC";
+export const GET_CITIES = "GET_CITIES";
+export const GET_ONE_CITY = "GET_ONE_CITY";
+export const REMOVE_ONE_CITY = "REMOVE_ONE_CITY";
+export const UPDATE_ONE_CITY = "UPDATE_ONE_CITY";
 
-export const getTodo = (payload) => ({
-  type: GET_TODOS,
+export const getCities = (payload) => ({
+  type: GET_CITIES,
   payload,
 });
 
-export const getOneTodo = (payload) => ({
-  type: GET_ONE_TODO,
+export const getOnecity = (payload) => ({
+  type: GET_ONE_CITY,
   payload,
 });
 
-export const updateTodo = (payload) => ({
-  type: UPDATE_ONE_TODO,
+export const removeCity = (payload) => ({
+  type: REMOVE_ONE_CITY,
   payload,
 });
 
-export const removeTodo = (payload) => ({
-  type: REMOVE_ONE_TODO,
-  payload,
-});
-
-export const sortByCountry = (payload) => ({
-  type: SORT_BY_COUNTRY,
-  payload,
-});
-
-export const sortByPopulationAsc = (payload) => ({
-  type: SORT_BY_POPULATION_ASC,
-  payload,
-});
-
-export const sortByPopulationDesc = (payload) => ({
-  type: SORT_BY_POPULATION_DESC,
+export const updateCity = (payload) => ({
+  type: UPDATE_ONE_CITY,
   payload,
 });
