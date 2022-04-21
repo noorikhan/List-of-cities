@@ -1,48 +1,32 @@
 {
   "countries": [
     {
-      "country": "india",
+      "country": "India",
       "id": 1
     },
     {
-      "country": "usa",
+      "country": "USA",
       "id": 5
     },
     {
-      "country": "srilanka",
+      "country": "SriLanka",
       "id": 6
     },
     {
-      "country": "nepal",
+      "country": "Nepal",
       "id": 7
     },
     {
-      "country": "america",
+      "country": "America",
       "id": 8
     }
   ],
   "cities": [
     {
-      "country": "india",
-      "population": "19000000",
-      "city": "Davanagere",
-      "id": 1
-    },
-    {
-      "country": "srilanka",
+      "country": "SriLanka",
       "population": "12389",
       "city": "xyz",
       "id": 3
-    },
-    {
-      "city": "Davanagere",
-      "population": "1246795",
-      "id": 4
-    },
-    {
-      "city": "Davanagere",
-      "population": "3467890032",
-      "id": 5
     },
     {
       "country": "nepal",
@@ -63,24 +47,34 @@
       "id": 8
     },
     {
-      "city": "sxsxs",
-      "population": "234565453",
-      "id": 9
-    },
-    {
       "city": "Davanagere",
-      "population": "56678",
-      "id": 10
-    },
-    {
-      "city": "Davanagere",
-      "population": "56678",
+      "population": "23345",
+      "country": "usa",
       "id": 11
     },
     {
       "city": "Davanagere",
-      "population": "56678",
+      "population": "23345",
+      "country": "India",
       "id": 12
+    },
+    {
+      "city": "Davanagere",
+      "population": "34566564",
+      "country": "nepal",
+      "id": 13
+    },
+    {
+      "city": "Davanagere",
+      "population": "34566564",
+      "country": "India",
+      "id": 14
+    },
+    {
+      "city": "Davanagere",
+      "population": "34566564",
+      "country": "usa",
+      "id": 15
     }
   ]
 }

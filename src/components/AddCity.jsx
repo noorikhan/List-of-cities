@@ -1,8 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { getCountries } from "../Redux/actions";
 
 export const AddCity = () => {
-  const [countries, setCountry] = useState([]);
+  const countries = useSelector((store) => store.cities.country);
+
+  const dispatch = useDispatch();
+
   const [city, setCities] = useState();
 
   const handleFormdata = (e) => {
@@ -29,7 +34,9 @@ export const AddCity = () => {
   const getCountry = () => {
     axios
       .get("http://localhost:8080/countries")
-      .then((res) => setCountry(res.data))
+      .then((res) => {
+        dispatch(getCountries(res.data));
+      })
       .catch((err) => console.error(err));
   };
 
@@ -53,6 +60,7 @@ export const AddCity = () => {
           value={handleFormdata.country}
           onChange={handleFormdata}
         >
+          <option value="">Select Country</option>
           {countries.map((ele) => (
             <option key={ele.id} value={ele.country}>
               {ele.country}

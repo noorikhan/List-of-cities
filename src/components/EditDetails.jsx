@@ -70,6 +70,7 @@ export const EditDetails = () => {
           value={handleFormdata.country}
           onChange={handleFormdata}
         >
+          <option value="">Filter By Country</option>
           {country.map((ele) => (
             <option value={ele.country}>{ele.country}</option>
           ))}

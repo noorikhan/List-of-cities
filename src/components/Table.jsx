@@ -1,16 +1,17 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { getCities } from "../Redux/actions";
+import { getCities, getCountries } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Table = () => {
-  const data = useSelector((store) => store.cities.city);
+  const { city, country } = useSelector((store) => store.cities);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     getData();
+    getCountry();
   }, []);
 
   const getData = () => {
@@ -26,25 +27,64 @@ export const Table = () => {
       .catch((err) => console.error(err));
   };
 
+  const getCountry = () => {
+    axios
+      .get("http://localhost:8080/countries")
+      .then((res) => {
+        dispatch(getCountries(res.data));
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const sortByPopulationAsc = () => {
+    axios
+      .get("http://localhost:8080/cities?_sort=population&_order=asc")
+      .then(({ data }) => dispatch(getCities(data)));
+  };
+
+  const sortByPopulationDesc = () => {
+    axios
+      .get("http://localhost:8080/cities?_sort=population&_order=desc")
+      .then(({ data }) => dispatch(getCities(data)));
+  };
+
+  const filterByCountry = (val) => {
+    axios
+      .get(`http://localhost:8080/cities?country=${val}`)
+      .then(({ data }) => dispatch(getCities(data)));
+  };
+
   return (
     <>
       <div>
-        <button onClick={() => dispatch(sortByCountry(data))}>
-          FilterByCountry
-        </button>
         <button
           onClick={() => {
-            dispatch(sortByPopulationAsc(data));
+            sortByPopulationAsc();
           }}
         >
           SortByPopulationAsc
         </button>
         <button
           onClick={() => {
-            dispatch(sortByPopulationDesc(data));
+            sortByPopulationDesc();
           }}
         >
           SortByPopulationDesc
+        </button>
+        <button>
+          <select
+            name="country"
+            onChange={(e) => {
+              filterByCountry(e.target.value);
+            }}
+          >
+            <option value="">Filter By Country</option>
+            {country.map((ele) => (
+              <option key={ele.id} value={ele.country}>
+                {ele.country}
+              </option>
+            ))}
+          </select>
         </button>
       </div>
       <table>
@@ -59,7 +99,7 @@ export const Table = () => {
           </tr>
         </thead>
         <tbody>
-          {data.map((ele) => (
+          {city.map((ele) => (
             <tr key={ele.id}>
               <td>{ele.id}</td>
               <td>{ele.country}</td>
