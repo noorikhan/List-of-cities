@@ -7,12 +7,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Home />
-      <Navbar />
-      <EditDetails />
-      <AddCity />
-      <AddCountry />
-      <Table /> */}
       <AllRoutes />
     </div>
   );
