@@ -1,6 +1,18 @@
 import React from "react";
-import { Table } from "./Table";
+import { TableData } from "./Table";
+import { SortingFiltering } from "./SortingandFiltering";
+import { Box, Container } from "@chakra-ui/react";
 
 export const Home = () => {
-  return <Table />;
+  return (
+    <div>
+      <Container>
+        <SortingFiltering />
+      </Container>
+
+      <Box>
+        <TableData />
+      </Box>
+    </div>
+  );
 };

@@ -74,7 +74,7 @@ export const filterDataByCountry = (val) => (dispatch) => {
     .then(({ data }) => dispatch(getCities(data)));
 };
 
-export const getOneCityData = () => (dispatch) => {
+export const getOneCityData = (id) => (dispatch) => {
   axios
     .get(`https://country-city-population.herokuapp.com/cities/${id}`)
     .then(({ data }) => dispatch(getOnecity(data)))

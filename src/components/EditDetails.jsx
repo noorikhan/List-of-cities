@@ -2,8 +2,19 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { getOneCityData, updateCity } from "../Redux/actions";
+import { getOneCityData, updateCity, getCountryData } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  Container,
+  FormLabel,
+  Input,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  Select,
+} from "@chakra-ui/react";
 
 export const EditDetails = () => {
   const { id } = useParams();
@@ -11,17 +22,20 @@ export const EditDetails = () => {
   const data = useSelector((store) => store.city.city);
   const dispatch = useDispatch();
 
-  const [country, setCountry] = useState([]);
-  const [city, setCities] = useState();
+  const countries = useSelector((store) => store.cities.country);
+
+  const [cityData, setCities] = useState();
+  const [population, setPopulation] = useState();
 
   const handleFormdata = (e) => {
     const { name, value } = e.target;
-    setCities({ ...city, [name]: value });
+    setCities({ ...cityData, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     postData();
+    alert("Upadated successfully");
   };
 
   useEffect(() => {
@@ -30,12 +44,16 @@ export const EditDetails = () => {
   }, []);
 
   const getData = () => {
-    dispatch(getOneCityData());
+    dispatch(getOneCityData(id));
   };
 
   const postData = () => {
     axios
-      .patch(`https://country-city-population.herokuapp.com/cities/${id}`, city)
+      .patch(`https://country-city-population.herokuapp.com/cities/${id}`, {
+        country: cityData.country,
+        population: +population,
+        city: cityData.city,
+      })
       .then(({ data }) => {
         dispatch(updateCity(data));
         getData();
@@ -43,39 +61,50 @@ export const EditDetails = () => {
   };
 
   const getCountry = () => {
-    axios
-      .get("https://country-city-population.herokuapp.com/countries")
-      .then((res) => setCountry(res.data))
-      .catch((err) => console.error(err));
+    dispatch(getCountryData());
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="city"
-          type="text"
-          placeholder={data.city}
-          onChange={handleFormdata}
-        />
-        <input
-          name="population"
-          type="number"
-          placeholder={data.population}
-          onChange={handleFormdata}
-        />
-        <select
-          name="country"
-          value={handleFormdata.country}
-          onChange={handleFormdata}
-        >
-          <option value="">Filter By Country</option>
-          {country.map((ele) => (
-            <option value={ele.country}>{ele.country}</option>
-          ))}
-        </select>
-        <input type="submit" value="submit" />
-      </form>
+      <Container>
+        <form onSubmit={handleSubmit}>
+          <FormLabel>City Name</FormLabel>
+          <Input
+            name="city"
+            type="text"
+            placeholder={data.city}
+            onChange={handleFormdata}
+            required
+          />
+
+          <FormLabel>City Population</FormLabel>
+          <NumberInput
+            onChange={(e) => {
+              setPopulation(e);
+            }}
+            required
+          >
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+
+          <Select
+            name="country"
+            defaultValue={handleFormdata.country}
+            onChange={handleFormdata}
+            required
+          >
+            <option value="">Select Country</option>
+            {countries.map((ele) => (
+              <option value={ele.country}>{ele.country}</option>
+            ))}
+          </Select>
+          <Input type="submit" value="Submit" />
+        </form>
+      </Container>
     </>
   );
 };

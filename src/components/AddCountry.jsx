@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+import { Container, Input, Button, FormLabel } from "@chakra-ui/react";
 
 export const AddCountry = () => {
   const [country, setCountry] = useState("");
@@ -12,24 +13,28 @@ export const AddCountry = () => {
       })
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
+
+    alert("Country Added successfully.");
   };
 
   return (
     <>
-      <input
-        type="text"
-        placeholder="enterCountryName"
-        onChange={(e) => {
-          setCountry(e.target.value);
-        }}
-      />
-      <button
-        onClick={() => {
-          postData();
-        }}
-      >
-        Submit
-      </button>
+      <Container>
+        <FormLabel>Enter Country Name</FormLabel>
+        <Input
+          type="text"
+          onChange={(e) => {
+            setCountry(e.target.value);
+          }}
+        />
+        <Button
+          onClick={() => {
+            postData();
+          }}
+        >
+          Submit
+        </Button>
+      </Container>
     </>
   );
 };
