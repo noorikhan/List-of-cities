@@ -1,7 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { getCities, getCountries } from "../Redux/actions";
+import {
+  deleteRowData,
+  sortDataByPopulationAsc,
+  sortDataByPopulationDesc,
+  filterDataByCountry,
+  getCityData,
+  getCountryData,
+} from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const Table = () => {
@@ -15,43 +22,27 @@ export const Table = () => {
   }, []);
 
   const getData = () => {
-    axios
-      .get("http://localhost:8080/cities")
-      .then(({ data }) => dispatch(getCities(data)));
-  };
-
-  const deleteRow = (id) => {
-    axios
-      .delete(`http://localhost:8080/cities/${id}`)
-      .then((res) => dispatch(getCities(data)))
-      .catch((err) => console.error(err));
+    dispatch(getCityData());
   };
 
   const getCountry = () => {
-    axios
-      .get("http://localhost:8080/countries")
-      .then((res) => {
-        dispatch(getCountries(res.data));
-      })
-      .catch((err) => console.error(err));
+    dispatch(getCountryData());
+  };
+
+  const deleteRow = (id) => {
+    dispatch(deleteRowData(id));
   };
 
   const sortByPopulationAsc = () => {
-    axios
-      .get("http://localhost:8080/cities?_sort=population&_order=asc")
-      .then(({ data }) => dispatch(getCities(data)));
+    dispatch(sortDataByPopulationAsc());
   };
 
   const sortByPopulationDesc = () => {
-    axios
-      .get("http://localhost:8080/cities?_sort=population&_order=desc")
-      .then(({ data }) => dispatch(getCities(data)));
+    dispatch(sortDataByPopulationDesc());
   };
 
   const filterByCountry = (val) => {
-    axios
-      .get(`http://localhost:8080/cities?country=${val}`)
-      .then(({ data }) => dispatch(getCities(data)));
+    dispatch(filterDataByCountry(val));
   };
 
   return (

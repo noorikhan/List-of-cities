@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { useParams } from "react-router";
 import { useState, useEffect } from "react";
-import { getOnecity, updateCity } from "../Redux/actions";
+import { getOneCityData, updateCity } from "../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 
 export const EditDetails = () => {
@@ -29,24 +29,23 @@ export const EditDetails = () => {
     getCountry();
   }, []);
 
+  const getData = () => {
+    dispatch(getOneCityData());
+  };
+
   const postData = () => {
-    axios.patch(`http://localhost:8080/cities/${id}`, city).then(({ data }) => {
-      dispatch(updateCity(data));
-      getData();
-    });
+    axios
+      .patch(`https://country-city-population.herokuapp.com/cities/${id}`, city)
+      .then(({ data }) => {
+        dispatch(updateCity(data));
+        getData();
+      });
   };
 
   const getCountry = () => {
     axios
-      .get("http://localhost:8080/countries")
+      .get("https://country-city-population.herokuapp.com/countries")
       .then((res) => setCountry(res.data))
-      .catch((err) => console.error(err));
-  };
-
-  const getData = () => {
-    axios
-      .get(`http://localhost:8080/cities/${id}`)
-      .then(({ data }) => dispatch(getOnecity(data)))
       .catch((err) => console.error(err));
   };
 

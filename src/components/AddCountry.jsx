@@ -7,7 +7,9 @@ export const AddCountry = () => {
 
   const postData = () => {
     axios
-      .post("http://localhost:8080/countries", { country })
+      .post("https://country-city-population.herokuapp.com/countries", {
+        country,
+      })
       .then((res) => console.log(res))
       .catch((err) => console.error(err));
   };

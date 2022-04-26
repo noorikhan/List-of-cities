@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { getCountries } from "../Redux/actions";
+import { getCountryData } from "../Redux/actions";
 
 export const AddCity = () => {
   const countries = useSelector((store) => store.cities.country);
@@ -26,18 +26,13 @@ export const AddCity = () => {
 
   const postData = () => {
     axios
-      .post(" http://localhost:8080/cities", city)
+      .post("https://country-city-population.herokuapp.com/cities", city)
       .then((res) => console.log(res.data))
       .catch((err) => console.error(err));
   };
 
   const getCountry = () => {
-    axios
-      .get("http://localhost:8080/countries")
-      .then((res) => {
-        dispatch(getCountries(res.data));
-      })
-      .catch((err) => console.error(err));
+    dispatch(getCountryData());
   };
 
   return (
